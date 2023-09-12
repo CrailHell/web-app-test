@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.pwc'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'com.microsoft.playwright', name: 'playwright', version: '1.37.0'
+    implementation group: 'com.microsoft.playwright', name: 'driver-bundle', version: '1.37.0'
+
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.10.0'
+}
+
+task runPlaywrightCli(type: JavaExec) {
+    mainClass = 'com.microsoft.playwright.CLI'
+    classpath sourceSets.main.runtimeClasspath
+    args 'open'
+}
+
+test {
+    useJUnitPlatform()
+}
